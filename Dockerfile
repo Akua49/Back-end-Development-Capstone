@@ -1,4 +1,4 @@
-FROM python:3.11-slim
+FROM python:3.9.16-slim
 
 ENV PYTHONUNBUFFERED=1 PYTHONDONTWRITEBYTECODE=1
 WORKDIR /app
@@ -8,4 +8,4 @@ COPY . .
 RUN chmod +x /app/entrypoint.sh
 EXPOSE 8000
 ENTRYPOINT ["/bin/sh", "/app/entrypoint.sh"]
-CMD ["python", "manage.py", "runserver", "0.0.0.0:8000", "--noreload"]
+CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
