@@ -32,6 +32,9 @@ spec:
             httpGet:
               path: /
               port: 8000
+              httpHeaders:
+                - name: Host
+                  value: localhost
             initialDelaySeconds: 10
             periodSeconds: 10
           resources:
