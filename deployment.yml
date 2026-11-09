@@ -27,7 +27,7 @@ spec:
             - name: PICTURES_SERVICE_URL
               value: https://pictures.2gykk5wm4vy1.us-south.codeengine.appdomain.cloud/picture
             - name: SONGS_SERVICE_URL
-              value: http://songs-sn-labs-taxiwaygizmo.labs-prod-openshift-san-a45631dc5778dc6371c67d206ba9ae5c-0000.us-east.containers.appdomain.cloud/song
+              value: https://songs-sn-labs-taxiwaygizmo.labs-prod-openshift-san-a45631dc5778dc6371c67d206ba9ae5c-0000.us-east.containers.appdomain.cloud/song
           readinessProbe:
             httpGet:
               path: /
