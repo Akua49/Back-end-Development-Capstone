@@ -33,7 +33,7 @@ class LoginForm(AuthenticationForm):
         fields = ["username", "password"]
 
 
-class SignUpForm(AuthenticationForm):
+class SignUpForm(forms.Form):
     username = forms.CharField(
         max_length=100,
         required=True,
