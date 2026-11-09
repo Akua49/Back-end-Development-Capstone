@@ -1,5 +1,5 @@
 apiVersion: apps/v1
-kind: # {insert kind here}
+kind: Deployment
 metadata:
   labels:
     run: djangoserver
@@ -10,20 +10,35 @@ spec:
     matchLabels:
       run: djangoserver
   strategy:
-    rollingUpdate:
-      maxSurge: 25%
-      maxUnavailable: 25%
-    type: RollingUpdate
+    type: Recreate
   template:
     metadata:
       labels:
         run: djangoserver
     spec:
       containers:
-      - image: # {insert image here}
-        imagePullPolicy: Always
-        name: djangoserver
-        ports:
-        - containerPort: # {insert port here}
-          protocol: TCP
+        - name: djangoserver
+          image: us.icr.io/sn-labs-taxiwaygizmo/djangoserver:1
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8000
+              protocol: TCP
+          env:
+            - name: PICTURES_SERVICE_URL
+              value: https://pictures.2gykk5wm4vy1.us-south.codeengine.appdomain.cloud/picture
+            - name: SONGS_SERVICE_URL
+              value: http://songs-sn-labs-taxiwaygizmo.labs-prod-openshift-san-a45631dc5778dc6371c67d206ba9ae5c-0000.us-east.containers.appdomain.cloud/song
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 8000
+            initialDelaySeconds: 10
+            periodSeconds: 10
+          resources:
+            requests:
+              cpu: 100m
+              memory: 128Mi
+            limits:
+              cpu: 500m
+              memory: 512Mi
       restartPolicy: Always
